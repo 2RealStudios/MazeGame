@@ -13,7 +13,8 @@ class MAZEGAME_API AMazeGameGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
-	
+	AMazeGameGameMode(const FObjectInitializer& ObjectInitializer);  // Our added constructor
+
 	
 	
 };
