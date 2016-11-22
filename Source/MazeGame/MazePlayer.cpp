@@ -85,4 +85,9 @@ void AMazePlayer::PadLookup(float Rate)
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
+int AMazePlayer::OnItemCollide(const Item& item, int amount)
+{
+	return 0;
+}
+
 

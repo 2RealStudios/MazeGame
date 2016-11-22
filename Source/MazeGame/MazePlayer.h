@@ -2,11 +2,12 @@
 
 #pragma once
 
+#include "ItemCollidable.h"
 #include "GameFramework/Character.h"
 #include "MazePlayer.generated.h"
 
 UCLASS()
-class MAZEGAME_API AMazePlayer : public ACharacter
+class MAZEGAME_API AMazePlayer : public ACharacter, public ItemCollidable
 {
 	GENERATED_BODY()
 
@@ -35,4 +36,7 @@ public:
 
 	UFUNCTION()
 		void PadLookup(float Rate);
+
+	virtual int OnItemCollide(const Item& item, int amount) override;
+
 };
