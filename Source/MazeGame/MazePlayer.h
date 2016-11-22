@@ -29,4 +29,10 @@ public:
 	//handles strafing
 	UFUNCTION()
 		void Strafe(float Val);
+	
+	UFUNCTION()
+		void PadTurn(float Rate);
+
+	UFUNCTION()
+		void PadLookup(float Rate);
 };

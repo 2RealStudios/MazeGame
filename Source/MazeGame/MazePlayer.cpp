@@ -34,7 +34,8 @@ void AMazePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("Strafe", this, &AMazePlayer::Strafe);
 	InputComponent->BindAxis("Turn", this, &AMazePlayer::AddControllerYawInput);
 	InputComponent->BindAxis("LookUp", this, &AMazePlayer::AddControllerPitchInput);
-
+	InputComponent->BindAxis("PadTurn", this, &AMazePlayer::PadTurn);
+	InputComponent->BindAxis("PadLookUp", this, &AMazePlayer::PadLookup);
 }
 
 
@@ -68,4 +69,20 @@ void AMazePlayer::Strafe(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
+float BaseTurnRate = 45;
+float BaseLookUpRate = 45;
+
+void AMazePlayer::PadTurn(float Rate)
+{
+	// calculate delta for this frame from the rate information
+	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AMazePlayer::PadLookup(float Rate)
+{
+	// calculate delta for this frame from the rate information
+	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+
 
