@@ -9,5 +9,5 @@ class MAZEGAME_API PlayerInteractable
 public:
 	PlayerInteractable();
 
-	virtual int onPlayerInteract(const AMazePlayer& player) = 0;
+	virtual int OnPlayerInteract(const AMazePlayer& player) = 0;
 };
