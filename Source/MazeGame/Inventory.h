@@ -10,6 +10,8 @@
 class MAZEGAME_API Inventory
 {
 public:
+	Inventory();
+
 	Inventory(int  MaxSize);
     
 	~Inventory();

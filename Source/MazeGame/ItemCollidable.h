@@ -10,6 +10,6 @@ class MAZEGAME_API ItemCollidable
 public:
 	ItemCollidable();
 
-	virtual int OnItemCollide(const Item& item, int amount) = 0;
+	virtual int OnItemCollide(Item& item, int amount) = 0;
 
 };

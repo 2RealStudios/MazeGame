@@ -3,12 +3,13 @@
 #include "MazeGame.h"
 #include "Inventory.h"
 
+Inventory::Inventory() : Inventory(16)
+{
+}
+
 Inventory::Inventory(int maxSize)
 {
-    this->MaxSize=maxSize;
-    Item item(1);
-	Items[item] = 0;
-    
+	this->MaxSize = maxSize;
 }
 
 Inventory::~Inventory()

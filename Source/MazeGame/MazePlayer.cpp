@@ -9,7 +9,7 @@ AMazePlayer::AMazePlayer()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	this->PlayerInventory = Inventory(1);
 }
 
 // Called when the game starts or when spawned
@@ -85,9 +85,9 @@ void AMazePlayer::PadLookup(float Rate)
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-int AMazePlayer::OnItemCollide(const Item& item, int amount)
+int AMazePlayer::OnItemCollide(Item& item, int amount)
 {
-	return 0;
+	return this->PlayerInventory.AddItem(item, amount);
 }
 
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "ItemCollidable.h"
+#include "Inventory.h"
 #include "GameFramework/Character.h"
 #include "MazePlayer.generated.h"
 
@@ -38,5 +39,8 @@ public:
 		void PadLookup(float Rate);
 
 	virtual int OnItemCollide(const Item& item, int amount) override;
+
+protected:
+	Inventory PlayerInventory;
 
 };
