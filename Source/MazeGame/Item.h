@@ -10,6 +10,7 @@ class MAZEGAME_API Item
 		const int ID;
 };
 
+// Used by the unordered_map to create a hash of the Item (which is the ID)
 struct hash_item {
 	size_t operator()(const Item &item) const
 	{
