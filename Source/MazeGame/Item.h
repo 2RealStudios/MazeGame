@@ -7,7 +7,8 @@
  */
 class MAZEGAME_API Item
 {
-public:
-	Item();
-	~Item();
+    public:
+        Item(int idNum);
+        ~Item();
+        const int ID;
 };

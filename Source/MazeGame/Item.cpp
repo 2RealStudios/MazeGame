@@ -3,8 +3,9 @@
 #include "MazeGame.h"
 #include "Item.h"
 
-Item::Item()
+Item::Item(int idNum) : ID(idNum)
 {
+
 }
 
 Item::~Item()
