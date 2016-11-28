@@ -29,14 +29,14 @@ public:
     
 	~Inventory();
     
-    int addItem(Item &item, int amount);
-    int removeItem(Item &item, int amount);
-    int getItemCount(Item &item);
-    std::unordered_set<Item,char,hash_item, equal_item> getItems();
+    int AddItem(Item &item, int amount);
+    int RemoveItem(Item &item, int amount);
+    int GetItemCount(Item &item);
+   // std::unordered_set<Item,char,hash_item, equal_item> getItems();
     
 private:
     int MaxSize;
-    std::unordered_map<Item, char, hash_item, equal_item> grade_list;
+    std::unordered_map<Item, char, hash_item, equal_item> Items;
 };
 
 
