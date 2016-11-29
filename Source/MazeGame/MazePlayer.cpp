@@ -16,6 +16,12 @@ AMazePlayer::AMazePlayer()
 	FirstPersonCameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f); // Position the camera
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
 
+	// Setup TraceParams for RayTracing
+	TraceParams = FCollisionQueryParams(FName(TEXT("TraceParams")), false, this);
+	TraceParams.bTraceComplex = false;
+	TraceParams.bTraceAsyncScene = false;
+	TraceParams.bReturnPhysicalMaterial = false;
+
 	this->PlayerInventory = Inventory(1);
 }
 
@@ -27,10 +33,14 @@ void AMazePlayer::BeginPlay()
 }
 
 // Called every frame
-void AMazePlayer::Tick( float DeltaTime )
+void AMazePlayer::Tick(float DeltaTime)
 {
-	Super::Tick( DeltaTime );
-
+	Super::Tick(DeltaTime);
+	AActor* actor = FindFocusedActor(300);
+	if (actor) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("TETSTSRTSTD"));
+	}
 }
 
 // Called to bind functionality to input
@@ -44,13 +54,6 @@ void AMazePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	InputComponent->BindAxis("PadTurn", this, &AMazePlayer::PadTurn);
 	InputComponent->BindAxis("PadLookUp", this, &AMazePlayer::PadLookup);
 }
-
-
-void AMazePlayer::interact(PlayerInteractable& object)
-{
-	object.OnPlayerInteract(this);
-}
-
 
 //handles moving forward/backward
 void AMazePlayer::MoveForward(float Value)
@@ -97,5 +100,27 @@ bool AMazePlayer::hasItem(Item& item)
 	return this->PlayerInventory.GetItemCount(item) > 0;
 }
 
+AActor* AMazePlayer::FindFocusedActor(int distance)
+{
+	if (!Controller)
+	{
+		return nullptr;
+	}
 
+	FVector Location;
+	FRotator Rotation;
+	FHitResult Hit(ForceInit);
+
+	Controller->GetPlayerViewPoint(Location, Rotation);
+
+	FVector Start = Location;
+	FVector End = Start + (Rotation.Vector() * distance);
+
+	if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Camera, TraceParams, FCollisionResponseParams::DefaultResponseParam))
+	{
+		return Hit.GetActor();
+	}
+
+	return nullptr;
+}
 

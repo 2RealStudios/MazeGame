@@ -43,14 +43,8 @@ public:
 	UFUNCTION()
 		void PadLookup(float Rate);
 
-	/** Finds the first actor in front of the place in a given distance*/
-	AActor* FindFocusedActor(int distance);
-
 	virtual int OnItemCollide(Item& item, int amount) override;
 		
 private:
-
 	Inventory PlayerInventory;
-	FCollisionQueryParams TraceParams;
-
 };
