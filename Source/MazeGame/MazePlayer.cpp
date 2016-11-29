@@ -9,6 +9,14 @@ AMazePlayer::AMazePlayer()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+
+	// Setup Camera for proper HMD 
+	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
+	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
+	FirstPersonCameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f); // Position the camera
+	FirstPersonCameraComponent->bUsePawnControlRotation = true;
+
 	this->PlayerInventory = Inventory(1);
 }
 
@@ -42,31 +50,20 @@ void AMazePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 //handles moving forward/backward
 void AMazePlayer::MoveForward(float Value)
 {
-	if ((Controller != NULL) && (Value != 0.0f))
+	if (Value != 0.0f)
 	{
-		// find out which way is forward
-		FRotator Rotation = Controller->GetControlRotation();
-		// Limit pitch when walking or falling
-		if (GetCharacterMovement()->IsMovingOnGround() || GetCharacterMovement()->IsFalling())
-		{
-			Rotation.Pitch = 0.0f;
-		}
-		// add movement in that direction
-		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
+		// add movement in the forward direction
+		AddMovementInput(GetActorForwardVector(), Value);
 	}
 }
 
 //handles strafing
 void AMazePlayer::Strafe(float Value)
 {
-	if ((Controller != NULL) && (Value != 0.0f))
+	if (Value != 0.0f)
 	{
-		// find out which way is right
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
-		// add movement in that direction
-		AddMovementInput(Direction, Value);
+		// add movement in the right direction
+		AddMovementInput(GetActorRightVector(), Value);
 	}
 }
 
@@ -89,5 +86,11 @@ int AMazePlayer::OnItemCollide(Item& item, int amount)
 {
 	return this->PlayerInventory.AddItem(item, amount);
 }
+
+bool AMazePlayer::hasItem(Item& item)
+{
+	return this->PlayerInventory.GetItemCount(item) > 0;
+}
+
 
 

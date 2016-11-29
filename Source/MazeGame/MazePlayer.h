@@ -11,10 +11,15 @@ UCLASS()
 class MAZEGAME_API AMazePlayer : public ACharacter, public ItemCollidable
 {
 	GENERATED_BODY()
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class UCameraComponent* FirstPersonCameraComponent;
 
 public:
 	// Sets default values for this character's properties
 	AMazePlayer();
+
+	bool hasItem(Item& item);
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,9 +43,8 @@ public:
 	UFUNCTION()
 		void PadLookup(float Rate);
 
-	virtual int OnItemCollide(const Item& item, int amount) override;
+	virtual int OnItemCollide(Item& item, int amount) override;
 
-protected:
+private:
 	Inventory PlayerInventory;
-
 };
