@@ -44,7 +44,7 @@ public:
 		void PadLookup(float Rate);
 
 	virtual int OnItemCollide(Item& item, int amount) override;
-
+		
 private:
 	Inventory PlayerInventory;
 };

@@ -1,15 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
+#pragma once
 
 #include "MazeGame.h"
 #include "MazePlayer.h"
-
 
 // Sets default values
 AMazePlayer::AMazePlayer()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 
 	// Setup Camera for proper HMD 
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
@@ -44,6 +43,12 @@ void AMazePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	InputComponent->BindAxis("LookUp", this, &AMazePlayer::AddControllerPitchInput);
 	InputComponent->BindAxis("PadTurn", this, &AMazePlayer::PadTurn);
 	InputComponent->BindAxis("PadLookUp", this, &AMazePlayer::PadLookup);
+}
+
+
+void AMazePlayer::interact(PlayerInteractable& object)
+{
+	object.OnPlayerInteract(this);
 }
 
 
