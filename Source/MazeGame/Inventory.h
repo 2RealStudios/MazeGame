@@ -16,8 +16,13 @@ public:
     
 	~Inventory();
     
+	/** Add item to inventory returns the amount that was not added */
     int AddItem(Item &item, int amount);
+
+	/** Remove item from inventory returns the amount that was removed*/
     int RemoveItem(Item &item, int amount);
+
+	/** Returns the amount of the item this inventory contains */
     int GetItemCount(Item &item);
    // std::unordered_set<Item,int,hash_item, equal_item> getItems();
     

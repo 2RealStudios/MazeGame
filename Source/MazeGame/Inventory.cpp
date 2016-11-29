@@ -14,12 +14,12 @@ Inventory::Inventory(int maxSize)
 
 Inventory::~Inventory()
 {
+	Items.clear();
 }
-
 
 int Inventory::AddItem(Item &item, int amount)
 {
-	if (Items.find(item) == Items.end())
+	if (Items.find(item) == Items.end() || amount < 0)
 		Items[item] = 0;
 	int newSize = Items[item] + amount;
 	int ret = 0;
@@ -37,24 +37,23 @@ int Inventory::AddItem(Item &item, int amount)
 
 	return ret;
 }
+
 int Inventory::RemoveItem(Item &item, int amount)
 {
-	if (Items.find(item) != Items.end())
+	if (Items.find(item) != Items.end() || amount < 0)
 		return 0;
-	int newSize = Items[item] - amount;
-	int ret = amount;
-	if (newSize > MaxSize)
-	{
-		ret = newSize - MaxSize;
-		newSize = MaxSize;
-	}
-	Items[item] = newSize;
-	if (Items[item] <= 0)
+
+	int currentCount = Items[item];
+	
+	if (currentCount <= amount)
 	{
 		Items.erase(item);
-		return newSize;
+		return currentCount;
 	}
-	return ret;
+
+	Items[item] = currentCount - amount;
+	
+	return amount;
 
 }
 
