@@ -52,5 +52,4 @@ private:
 
 	Inventory PlayerInventory;
 	FCollisionQueryParams TraceParams;
-
 };

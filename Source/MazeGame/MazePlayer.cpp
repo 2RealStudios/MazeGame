@@ -3,6 +3,7 @@
 
 #include "MazeGame.h"
 #include "MazePlayer.h"
+#include "PlayerInteractable.h"
 
 // Sets default values
 AMazePlayer::AMazePlayer()
@@ -36,11 +37,18 @@ void AMazePlayer::BeginPlay()
 void AMazePlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	AActor* actor = FindFocusedActor(300);
-	if (actor) 
+	AActor* actor = FindFocusedActor(3000);
+	IPlayerInteractable* inter = Cast<IPlayerInteractable>(actor);
+	if (actor)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("TETSTSRTSTD"));
+		if (actor->GetClass()->ImplementsInterface(UPlayerInteractable::StaticClass()))
+		{
+			IPlayerInteractable::Execute_OnPlayerInteract(actor, this);
+			UE_LOG(LogTemp, Warning, TEXT("I SEE YOU"));
+		}
 	}
+	
 }
 
 // Called to bind functionality to input

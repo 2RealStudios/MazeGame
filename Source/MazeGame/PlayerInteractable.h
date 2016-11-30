@@ -2,18 +2,25 @@
 
 #pragma once
 
-//#ifndef __PLAYERINTERACTABLE_H__   // if x.h hasn't been included yet...
-//#define __PLAYERINTERACTABLE_H__   //   #define this so the compiler knows it has been included
-
-
 #include "MazePlayer.h"
+#include "PlayerInteractable.generated.h"
 
-class MAZEGAME_API PlayerInteractable
+/**
+ * 
+ */
+UINTERFACE(BlueprintType)
+class MAZEGAME_API UPlayerInteractable : public UInterface
 {
-public:
-	PlayerInteractable();
-
-	virtual int OnPlayerInteract(AMazePlayer& player) = 0;
+	GENERATED_UINTERFACE_BODY()
 };
 
-//#endif 
+class MAZEGAME_API IPlayerInteractable
+{
+	GENERATED_IINTERFACE_BODY()
+
+public:
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="PlayerInteraction")
+		bool OnPlayerInteract(AMazePlayer* player);
+
+};
