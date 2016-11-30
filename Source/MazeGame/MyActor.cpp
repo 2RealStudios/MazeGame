@@ -31,3 +31,9 @@ bool AMyActor::OnPlayerInteract_Implementation(AMazePlayer* player)
 	//UE_LOG(LogTemp, Warning, TEXT("Player Sees Me"));
 	return false;
 }
+
+int AMyActor::OnItemCollide_Implementation(UItem* item, int amount)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Player Sees Me"));
+	return false;
+}

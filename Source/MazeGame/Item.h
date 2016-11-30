@@ -2,27 +2,58 @@
 
 #pragma once
 
-class MAZEGAME_API Item
+#include "Item.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class MAZEGAME_API UItem : public UObject
 {
+	GENERATED_BODY()
+	
 	public:
-		Item(int idNum);
-		~Item();
-		const int ID;
+
+		UItem(const class FObjectInitializer& ObjectInitializer);
+		//Item(int idNum);
+		~UItem();
+		int ID;
 };
 
-// Used by the unordered_map to create a hash of the Item (which is the ID)
-struct hash_item {
-	size_t operator()(const Item &item) const
+struct UItemMapKey
+{
+	TWeakObjectPtr<UItem> Item;
+	UItemMapKey(const UItem* inItem) : Item(inItem) {}
+
+	bool operator==(const struct UItemMapKey& item) const
 	{
-		return std::hash<int>()(item.ID);
+		return Item.Get()->ID == item.Item.Get()->ID;
 	}
+
+	friend FORCEINLINE uint32 GetTypeHash(const UItemMapKey& item)
+	{
+		return item.Item.Get()->ID;
+	}
+
 };
 
-// Used by the unordered_map to check the equality of two Items (which based on the IDs)
-struct equal_item {
-public:
-	bool operator()(const Item& item, const Item& item2) const {
-		return (item.ID == item2.ID);
+/*inline bool operator==(const UItemMapKey& KeyA, const UItemMapKey& KeyB)
+{
+	UItem* ItemA = KeyA.Item.Get();
+	UItem* ItemB = KeyB.Item.Get();
+	if (ItemA == nullptr)
+	{
+		return (ItemB != nullptr);
 	}
-};
+	else if (ItemB == nullptr)
+	{
+		return false;
+	}
+	return ItemB->ID == ItemA->ID;
+}
+inline uint32 GetTypeHash(const UItemMapKey& Key)
+{
+	return GetTypeHash(Key.Item.Get()->ID);
+}*/
+
 

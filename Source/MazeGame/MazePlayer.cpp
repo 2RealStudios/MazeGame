@@ -113,12 +113,12 @@ void AMazePlayer::PadLookup(float Rate)
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-int AMazePlayer::OnItemCollide(Item& item, int amount)
+int AMazePlayer::OnItemCollide_Implementation(UItem* item, int amount)
 {
-	return this->PlayerInventory.AddItem(item, amount);
+	return this->PlayerInventory.AddItem(*item, amount);
 }
 
-bool AMazePlayer::hasItem(Item& item)
+bool AMazePlayer::hasItem(UItem& item)
 {
 	return this->PlayerInventory.GetItemCount(item) > 0;
 }

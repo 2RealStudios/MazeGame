@@ -2,13 +2,14 @@
 
 #pragma once
 
+#include "ItemCollidable.h"
 #include "PlayerInteractable.h"
 #include "MazePlayer.h"
 #include "GameFramework/Actor.h"
 #include "MyActor.generated.h"
 
 UCLASS()
-class MAZEGAME_API AMyActor : public AActor, public IPlayerInteractable
+class MAZEGAME_API AMyActor : public AActor,public IItemCollidable, public IPlayerInteractable
 {
 	GENERATED_BODY()
 	
@@ -26,4 +27,9 @@ public:
 		bool OnPlayerInteract(AMazePlayer* player);
 	virtual bool OnPlayerInteract_Implementation(AMazePlayer* player) override;
 	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "ItemCollision")
+		int OnItemCollide(UItem* item, int amount);
+	virtual int OnItemCollide_Implementation(UItem* item, int amount) override;
+
+
 };

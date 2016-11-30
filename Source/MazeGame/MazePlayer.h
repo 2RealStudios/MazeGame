@@ -8,7 +8,7 @@
 #include "MazePlayer.generated.h"
 
 UCLASS()
-class MAZEGAME_API AMazePlayer : public ACharacter, public ItemCollidable
+class MAZEGAME_API AMazePlayer : public ACharacter, public IItemCollidable
 {
 	GENERATED_BODY()
 	
@@ -19,7 +19,7 @@ public:
 	// Sets default values for this character's properties
 	AMazePlayer();
 
-	bool hasItem(Item& item);
+	bool hasItem(UItem& item);
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -46,11 +46,15 @@ public:
 	/** Finds the first actor in front of the place in a given distance*/
 	AActor* FindFocusedActor(int distance);
 
-	virtual int OnItemCollide(Item& item, int amount) override;
+	//virtual int OnItemCollide(Item& item, int amount) override;
 	
 	UFUNCTION()
 		void Interact();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "ItemCollision")
+		int OnItemCollide(UItem* item, int amount);
+	virtual int OnItemCollide_Implementation(UItem* item, int amount) override;
+	
 private:
 
 	Inventory PlayerInventory;

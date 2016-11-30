@@ -17,19 +17,22 @@ public:
 	~Inventory();
     
 	/** Add item to inventory returns the amount that was not added */
-    int AddItem(Item &item, int amount);
+    int AddItem(UItem &item, int amount);
 
 	/** Remove item from inventory returns the amount that was removed*/
-    int RemoveItem(Item &item, int amount);
+	int RemoveItem(UItem &item, int amount);
 
 	/** Returns the amount of the item this inventory contains */
-    int GetItemCount(Item &item);
-   // std::unordered_set<Item,int,hash_item, equal_item> getItems();
+	int GetItemCount(UItem &item);
+	
+	//std::unordered_set<Item,int,hash_item, equal_item> getItems();
     
 private:
     int MaxSize;
-    std::unordered_map<Item, int, hash_item, equal_item> Items;
+	TMap<UItemMapKey, uint32 > Items;
 };
+
+
 
 
 

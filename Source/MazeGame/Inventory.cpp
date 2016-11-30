@@ -14,55 +14,65 @@ Inventory::Inventory(int maxSize)
 
 Inventory::~Inventory()
 {
-	Items.clear();
+	Items.Empty();
 }
 
-int Inventory::AddItem(Item &item, int amount)
+int Inventory::AddItem(UItem &item, int amount)
 {
-	if (Items.find(item) == Items.end() || amount < 0)
-		Items[item] = 0;
-	int newSize = Items[item] + amount;
+	UItem *ptr;
+	ptr = &item;
+	UItemMapKey key = UItemMapKey(ptr);
+	if (Items.Contains(key) || amount < 0)
+		Items[key] = 0;
+	int newSize = Items[key] + amount;
 	int ret = 0;
 	if (newSize > MaxSize) 
 	{
 		ret = newSize - MaxSize;
 		newSize = MaxSize;
 	}
-	Items[item] = newSize;
-	if (Items[item] <= 0)
+	Items.Add(key, newSize);
+	if (Items[key] <= 0)
 	{
-		Items.erase(item);
+		Items.Remove(key);
 		return amount;
 	}
 
 	return ret;
 }
 
-int Inventory::RemoveItem(Item &item, int amount)
+int Inventory::RemoveItem(UItem &item, int amount)
 {
-	if (Items.find(item) != Items.end() || amount < 0)
+	UItem *ptr;
+	ptr = &item;
+	UItemMapKey key = UItemMapKey(ptr);
+
+	if (Items.Contains(key) || amount < 0)
 		return 0;
 
-	int currentCount = Items[item];
+	int currentCount = Items[key];
 	
 	if (currentCount <= amount)
 	{
-		Items.erase(item);
+		Items.Remove(key);
 		return currentCount;
 	}
 
-	Items[item] = currentCount - amount;
+	Items.Add(key, currentCount - amount);
 	
 	return amount;
 
 }
 
-int Inventory::GetItemCount(Item &item)
+int Inventory::GetItemCount(UItem &item)
 {
-	if (Items.find(item) != Items.end())
-		return Items[item];
+	UItem *ptr;
+	ptr = &item;
+	UItemMapKey key = UItemMapKey(ptr);
+	if (Items.Contains(key))
+		return Items[key];
 	return 0;
 }
 
-//std::unordered_set<Item, char, hash_item, equal_item> getItems()
+//std::unordered_set<UItem, char, hash_UItem, equal_UItem> getItems()
 
