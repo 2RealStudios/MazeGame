@@ -41,10 +41,8 @@ void AMazePlayer::Tick(float DeltaTime)
 	IPlayerInteractable* inter = Cast<IPlayerInteractable>(actor);
 	if (actor)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("TETSTSRTSTD"));
 		if (actor->GetClass()->ImplementsInterface(UPlayerInteractable::StaticClass()))
 		{
-			IPlayerInteractable::Execute_OnPlayerInteract(actor, this);
 			UE_LOG(LogTemp, Warning, TEXT("I SEE YOU"));
 		}
 	}
@@ -57,10 +55,27 @@ void AMazePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMazePlayer::MoveForward);
 	PlayerInputComponent->BindAxis("Strafe", this, &AMazePlayer::Strafe);
-	InputComponent->BindAxis("Turn", this, &AMazePlayer::AddControllerYawInput);
-	InputComponent->BindAxis("LookUp", this, &AMazePlayer::AddControllerPitchInput);
-	InputComponent->BindAxis("PadTurn", this, &AMazePlayer::PadTurn);
-	InputComponent->BindAxis("PadLookUp", this, &AMazePlayer::PadLookup);
+	PlayerInputComponent->BindAxis("Turn", this, &AMazePlayer::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("LookUp", this, &AMazePlayer::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("PadTurn", this, &AMazePlayer::PadTurn);
+	PlayerInputComponent->BindAxis("PadLookUp", this, &AMazePlayer::PadLookup);
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMazePlayer::Interact);
+}
+
+
+void AMazePlayer::Interact()
+{
+	AActor* actor = FindFocusedActor(3000);
+	IPlayerInteractable* inter = Cast<IPlayerInteractable>(actor);
+	if (actor)
+	{
+		if (actor->GetClass()->ImplementsInterface(UPlayerInteractable::StaticClass()))
+		{
+			IPlayerInteractable::Execute_OnPlayerInteract(actor, this);
+			UE_LOG(LogTemp, Warning, TEXT("Interacting Now"));
+		}
+	}
+
 }
 
 //handles moving forward/backward

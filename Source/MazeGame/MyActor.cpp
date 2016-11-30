@@ -28,6 +28,6 @@ void AMyActor::Tick( float DeltaTime )
 
 bool AMyActor::OnPlayerInteract_Implementation(AMazePlayer* player)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Player Sees Me"));
+	//UE_LOG(LogTemp, Warning, TEXT("Player Sees Me"));
 	return false;
 }

@@ -47,7 +47,10 @@ public:
 	AActor* FindFocusedActor(int distance);
 
 	virtual int OnItemCollide(Item& item, int amount) override;
-		
+	
+	UFUNCTION()
+		void Interact();
+
 private:
 
 	Inventory PlayerInventory;
