@@ -4,6 +4,7 @@
 
 #include "ItemCollidable.h"
 #include "Inventory.h"
+#include "Components/WidgetInteractionComponent.h"
 #include "GameFramework/Character.h"
 #include "MazePlayer.generated.h"
 
@@ -11,11 +12,15 @@ UCLASS()
 class MAZEGAME_API AMazePlayer : public ACharacter, public IItemCollidable
 {
 	GENERATED_BODY()
-	
+
+public:
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* FirstPersonCameraComponent;
 
-public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class UWidgetInteractionComponent* WidgetInteraction;
+
 	// Sets default values for this character's properties
 	AMazePlayer();
 

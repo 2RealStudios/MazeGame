@@ -23,6 +23,13 @@ AMazePlayer::AMazePlayer()
 	TraceParams.bTraceAsyncScene = false;
 	TraceParams.bReturnPhysicalMaterial = false;
 
+	// Setup WidgetInteraction Componet for MainMenu
+	WidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("MenuInteraction"));
+	WidgetInteraction->SetupAttachment(FirstPersonCameraComponent);
+	WidgetInteraction->RelativeLocation = FVector(0,0,0);
+	WidgetInteraction->bShowDebug = false;
+	WidgetInteraction->Deactivate();
+
 	this->PlayerInventory = Inventory(1);
 }
 
@@ -75,7 +82,6 @@ void AMazePlayer::Interact()
 			UE_LOG(LogTemp, Warning, TEXT("Interacting Now"));
 		}
 	}
-
 }
 
 //handles moving forward/backward
