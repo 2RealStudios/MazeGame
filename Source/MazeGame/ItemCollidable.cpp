@@ -3,6 +3,9 @@
 #include "MazeGame.h"
 #include "ItemCollidable.h"
 
-ItemCollidable::ItemCollidable()
+UItemCollidable::UItemCollidable(const class FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 }
+
+

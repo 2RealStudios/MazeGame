@@ -2,14 +2,25 @@
 
 #pragma once
 
+#include "Item.h"
+#include "ItemCollidable.generated.h"
 
-#include "Item.h"  
- 
-class MAZEGAME_API ItemCollidable
+/**
+ * 
+ */
+UINTERFACE(BlueprintType)
+class MAZEGAME_API UItemCollidable: public UInterface
 {
-public:
-	ItemCollidable();
+	GENERATED_UINTERFACE_BODY()
+};
 
-	virtual int OnItemCollide(const Item& item, int amount) = 0;
+class MAZEGAME_API IItemCollidable
+{
+	GENERATED_IINTERFACE_BODY()
+
+public:
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ItemCollision")
+		int OnItemCollide(class UItem* item, int amount);
 
 };
