@@ -82,6 +82,10 @@ void AMazePlayer::Interact()
 			UE_LOG(LogTemp, Warning, TEXT("Interacting Now"));
 		}
 	}
+	else
+	{
+		WidgetInteraction->PressKey(EKeys::LeftMouseButton);
+	}
 }
 
 //handles moving forward/backward
