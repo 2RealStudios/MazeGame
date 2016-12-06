@@ -2,7 +2,6 @@
 
 #pragma once
 
-
 #include "Item.h"  
  
 class MAZEGAME_API ItemCollidable

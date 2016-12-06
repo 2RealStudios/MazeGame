@@ -9,5 +9,5 @@ class MAZEGAME_API PlayerInteractable
 public:
 	PlayerInteractable();
 
-	virtual int onPlayerInteract(const AMazePlayer& player) = 0;
+	virtual void OnPlayerInteract(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };
