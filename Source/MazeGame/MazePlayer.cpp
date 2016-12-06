@@ -27,8 +27,8 @@ AMazePlayer::AMazePlayer()
 	WidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("MenuInteraction"));
 	WidgetInteraction->SetupAttachment(FirstPersonCameraComponent);
 	WidgetInteraction->RelativeLocation = FVector(0,0,0);
-	WidgetInteraction->bShowDebug = false;
-	WidgetInteraction->Deactivate();
+	WidgetInteraction->bShowDebug = true;
+	
 
 	this->PlayerInventory = Inventory(1);
 }
@@ -82,7 +82,7 @@ void AMazePlayer::Interact()
 			UE_LOG(LogTemp, Warning, TEXT("Interacting Now"));
 		}
 	}
-	else
+	else if(WidgetInteraction->IsOverFocusableWidget())
 	{
 		WidgetInteraction->PressKey(EKeys::LeftMouseButton);
 	}
