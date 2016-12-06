@@ -3,10 +3,8 @@
 #include "MazeGame.h"
 #include "Item.h"
 
-Item::Item()
-{
-}
+UItem::UItem(const class FObjectInitializer& ObjectInitializer)
+{}
 
-Item::~Item()
-{
-}
+UItem::~UItem()
+{}

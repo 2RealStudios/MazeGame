@@ -3,11 +3,24 @@
 #pragma once
 
 #include "MazePlayer.h"
+#include "PlayerInteractable.generated.h"
 
-class MAZEGAME_API PlayerInteractable
+/**
+ * 
+ */
+UINTERFACE(BlueprintType)
+class MAZEGAME_API UPlayerInteractable : public UInterface
 {
-public:
-	PlayerInteractable();
+	GENERATED_UINTERFACE_BODY()
+};
 
-	virtual int onPlayerInteract(const AMazePlayer& player) = 0;
+class MAZEGAME_API IPlayerInteractable
+{
+	GENERATED_IINTERFACE_BODY()
+
+public:
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="PlayerInteraction")
+		bool OnPlayerInteract(AMazePlayer* player);
+
 };

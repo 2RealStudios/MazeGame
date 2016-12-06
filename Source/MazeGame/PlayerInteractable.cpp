@@ -3,6 +3,7 @@
 #include "MazeGame.h"
 #include "PlayerInteractable.h"
 
-PlayerInteractable::PlayerInteractable()
+UPlayerInteractable::UPlayerInteractable(const class FObjectInitializer& ObjectInitializer) 
+		: Super(ObjectInitializer)
 {
 }
