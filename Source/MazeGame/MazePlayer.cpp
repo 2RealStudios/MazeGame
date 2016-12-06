@@ -84,7 +84,8 @@ void AMazePlayer::Interact()
 	}
 	else if(WidgetInteraction->IsOverFocusableWidget())
 	{
-		WidgetInteraction->PressKey(EKeys::LeftMouseButton);
+		WidgetInteraction->PressPointerKey(EKeys::LeftMouseButton);
+		UE_LOG(LogTemp, Warning, TEXT("Interacting"));
 	}
 }
 
